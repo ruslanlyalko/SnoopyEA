@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnUser"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableTop="@mipmap/ic_user"
+            android:onClick="userButtonClick"/>
+
+        <Button
+            android:id="@+id/btnEvents"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="4dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableTop="@mipmap/ic_events"
+            app:srcCompat="@mipmap/ic_events"
+            android:onClick="eventsButtonClick"/>
+
+        <TextView
+            android:id="@+id/txtSnoopy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="16dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="56sp"
+            android:text="@string/app_title"/>
+
+
+        <View
+            android:id="@+id/myRectangleView"
+            android:layout_marginBottom="-10dp"
+            android:layout_width="260dp"
+            android:layout_height="55dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/rectangle"/>
+
+        <TextView
+            android:id="@+id/textEA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="@string/app_ea"/>
+
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@color/colorBg"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnOrder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin = "1dp"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_button1"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/btn_order"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorGray"></View>
+
+            <Button
+                android:id="@+id/btnCalendar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin = "1dp"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_button1"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/btn_calendar"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGray"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/btnTeam"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin = "1dp"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_button1"
+                android:background="?android:attr/selectableItemBackground"
+
+                android:text="@string/btn_team"/>
+
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorGray"></View>
+
+            <Button
+                android:id="@+id/btnRequisites"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin = "1dp"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_button1"
+                android:background="?android:attr/selectableItemBackground"
+                android:onClick="eventsButtonClick"
+                android:text="@string/btn_requisites"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGray"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
+
+
