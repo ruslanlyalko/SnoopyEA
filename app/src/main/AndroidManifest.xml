@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,36 +25,43 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UserActivity"
+            android:name=".ui.UserActivity"
             android:label="@string/title_activity_user"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.snoopyea.MainActivity" />
+                android:value="com.example.android.snoopyea.ui.MainActivity" />
         </activity>
         <activity
-            android:name=".EventsActivity"
+            android:name=".ui.EventsActivity"
             android:label="@string/title_activity_events"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.snoopyea.MainActivity" />
+                android:value="com.example.android.snoopyea.ui.MainActivity" />
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginActivity"
             android:label="@string/title_activity_login"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.snoopyea.MainActivity" />
+                android:value="com.example.android.snoopyea.ui.MainActivity" />
         </activity>
         <activity
-            android:name=".ResetPasswordActivity"
+            android:name=".ui.ResetPasswordActivity"
             android:label="@string/title_activity_reset_password"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.snoopyea.MainActivity" />
+                android:value="com.example.android.snoopyea.ui.MainActivity" />
+        </activity>
+        <activity android:name=".ui.SignupActivity"
+            android:label="@string/title_activity_signup"
+            android:parentActivityName=".ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.snoopyea.ui.MainActivity" />
         </activity>
     </application>
 

@@ -1,9 +1,10 @@
-package com.example.android.snoopyea;
+package com.example.android.snoopyea.ui;
 
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import com.example.android.snoopyea.R;
 
 public class EventsActivity extends AppCompatActivity {
 

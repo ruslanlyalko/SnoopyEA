@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    tools:context="com.example.android.snoopyea.LoginActivity">
+    tools:context="com.example.android.snoopyea.ui.LoginActivity">
 
 
     <LinearLayout
@@ -75,7 +75,7 @@
             android:textAllCaps="false"
             android:textColor="@color/colorAccent" />
 
-        <!-- Link to Login Screen
+        <!-- Link to Login Screen -->
 
         <Button
             android:id="@+id/btn_signup"
@@ -85,9 +85,9 @@
             android:background="@null"
             android:text="@string/btn_link_to_register"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="@color/colorAccent"
             android:textSize="15dp" />
-            -->
+
     </LinearLayout>
 
     <ProgressBar

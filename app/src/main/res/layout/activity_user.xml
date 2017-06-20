@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.android.snoopyea.UserActivity">
+    tools:context="com.example.android.snoopyea.ui.UserActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,19 +16,32 @@
             android:padding="16dp"
             android:orientation="vertical">
 
-           
+
 
             <ImageView
                 android:layout_width="@dimen/logo_w_h"
                 android:layout_height="@dimen/logo_w_h"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="16dp"
                 android:src="@android:drawable/ic_menu_gallery" />
 
             <TextView
                 android:id="@+id/textUserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/textUserEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
                 android:text="" />
 
             <Button
@@ -45,6 +58,14 @@
 
     </ScrollView>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="120dp"
+        android:visibility="gone"
+        />
 
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

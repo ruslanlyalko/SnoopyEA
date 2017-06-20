@@ -1,4 +1,4 @@
-package com.example.android.snoopyea;
+package com.example.android.snoopyea.ui;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -9,10 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.snoopyea.R;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btnUser, btnEvents, btnOrder, btnCalendar, btnTeam, btnRequisites;
     TextView txtSnoopy;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnCalendar.setOnClickListener(this);
         btnTeam.setOnClickListener(this);
         btnRequisites.setOnClickListener(this);
+
+
     }
 
     public void eventsButtonClick(View view) {
@@ -67,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             case R.id.btnOrder: {
+
+
 
 
                 break;
