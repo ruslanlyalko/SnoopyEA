@@ -19,6 +19,7 @@
 
 
             <ImageView
+                android:id="@+id/userImage"
                 android:layout_width="@dimen/logo_w_h"
                 android:layout_height="@dimen/logo_w_h"
                 android:layout_gravity="center_horizontal"
@@ -43,16 +44,6 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:text="" />
-
-            <Button
-                android:id="@+id/btn_logout"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dip"
-                android:background="@color/colorAccent"
-                android:text="@string/btn_logout"
-                android:textColor="@android:color/black" />
-
 
         </LinearLayout>
 

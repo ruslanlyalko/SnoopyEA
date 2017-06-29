@@ -20,15 +20,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private EditText inputEmail, inputPassword, inputName;
+    private EditText inputEmail, inputPassword, inputFirstName, inputSecondName, inputLastName, inputPhone;
     private Button btnSignUp, btnResetPassword;
     private ProgressBar progressBar;
-    private FirebaseAuth auth;
+    private FirebaseAuth mFirebaseAuth;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseRefCurrentUser;
 
@@ -39,8 +40,8 @@ public class SignupActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
         setContentView(R.layout.activity_signup);
-        //Get Firebase auth instance
-        auth = FirebaseAuth.getInstance();
+        //Get Firebase mFirebaseAuth instance
+        mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
         initializeReferences();
@@ -69,20 +70,31 @@ public class SignupActivity extends AppCompatActivity {
     *
      */
     private void signUp() {
+        final String firstName = inputFirstName.getText().toString().trim();
+        final String secondName = inputSecondName.getText().toString().trim();
+        final String lastName = inputLastName.getText().toString().trim();
+        final String phone = inputPhone.getText().toString().trim();
         final String email = inputEmail.getText().toString().trim();
         final String password = inputPassword.getText().toString().trim();
-        final String name = inputName.getText().toString().trim();
 
+        if (TextUtils.isEmpty(firstName) || TextUtils.isEmpty(secondName) || TextUtils.isEmpty(lastName)) {
+            //Toast.makeText(getApplicationContext(), "Enter name!", Toast.LENGTH_SHORT).show();
+            inputFirstName.setError("Enter name!");
+            return;
+        }
+        if (TextUtils.isEmpty(phone)) {
+            //Toast.makeText(getApplicationContext(), "Enter phone!", Toast.LENGTH_SHORT).show();
+            inputPhone.setError("Enter phone!");
+            return;
+        }
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
             return;
         }
-
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
             return;
         }
-
         if (password.length() < 6) {
             Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
             return;
@@ -90,21 +102,30 @@ public class SignupActivity extends AppCompatActivity {
 
         progressBar.setVisibility(View.VISIBLE);
         //create user
-        auth.createUserWithEmailAndPassword(email, password)
+        mFirebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressBar.setVisibility(View.GONE);
                         // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
+                        // the mFirebaseAuth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
-                            String uId = task.getResult().getUser().getUid();
-                            createUserData(name, email, uId);
-                            Toast.makeText(SignupActivity.this, R.string.toast_user_created +" "+ email , Toast.LENGTH_SHORT).show();
+                            UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(firstName+" "+lastName)
+                                    .build();
+                            mFirebaseAuth.getCurrentUser().updateProfile(profileUpdate).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    String uId = mFirebaseAuth.getCurrentUser().getUid();
+                                    createUserData(firstName, secondName,lastName,phone, email, uId);
+                                    Toast.makeText(SignupActivity.this, R.string.toast_user_created +" "+ email , Toast.LENGTH_SHORT).show();
 
-                            onBackPressed();
-                        } else {
+                                    onBackPressed();
+                                }
+                            });
+
+                            } else {
                             Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -112,15 +133,19 @@ public class SignupActivity extends AppCompatActivity {
                 });
     }
 
-    private void createUserData(String name, String email, String uId) {
-        mDatabaseRefCurrentUser = mFirebaseDatabase.getReference(Constants.FIREBASE_TABLE_USERS).child(uId);
-        User user = new User(name, email);
+
+    private void createUserData(String name, String secondName, String lastName, String phone, String email, String uId) {
+        mDatabaseRefCurrentUser = mFirebaseDatabase.getReference(Constants.FIREBASE_REF_USERS).child(uId);
+        User user = new User(name, secondName, lastName, phone, email,"01.06.1991");
         mDatabaseRefCurrentUser.setValue(user);
     }
 
     private void initializeReferences() {
         btnSignUp = (Button) findViewById(R.id.sign_up_button);
-        inputName = (EditText) findViewById(R.id.name);
+        inputFirstName = (EditText) findViewById(R.id.firstName);
+        inputSecondName= (EditText) findViewById(R.id.secondName);
+        inputLastName = (EditText) findViewById(R.id.lastName);
+        inputPhone = (EditText) findViewById(R.id.phone);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
