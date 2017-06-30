@@ -2,6 +2,7 @@ package com.example.android.snoopyea.ui;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -12,21 +13,24 @@ import android.widget.Toast;
 
 import com.example.android.snoopyea.R;
 import com.example.android.snoopyea.utils.SwipeLayout;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String DEBUG_TAG = "MainActivity.java";
-    Button btnUser, btnEvents, btnOrder, btnCalendar, btnTeam, btnRequisites, btnSwipe;
-    TextView txtSnoopy;
+
+    private static final String FB_LINK = "https://www.fb.com/snoopyagency" ;
+    private static final String INST_LINK = "https://www.instagram.com/snoopyagency" ;
+
+    Button btnUser, btnEvents, btnOrder, btnCalendar, btnTeam, btnRequisites, btnSwipe, btnFB, btnInst, btnCall;
+    TextView txtSnoopy, txtLink, getTxtLinkDetails;
     SwipeLayout swipeLayout;
 
     boolean doubleBackToExitPressedOnce = false;
     boolean swipeOpened = false;
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    //private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    private boolean linkActive = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +43,82 @@ public class MainActivity extends AppCompatActivity {
         // Enable connection without internet
         mDatabase.setPersistenceEnabled(true);
 
-        /*swipeLayout.setBottomSwipeEnabled(false);
-        swipeLayout.setTopSwipeEnabled(false);
-        */
-        swipeLayout.setSwipeEnabled(false);
 
+        txtSnoopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (linkActive) {
+                    txtSnoopy.setText("SNOOPY");
+                    linkActive = false;
+                    txtLink.setText("");
+                    getTxtLinkDetails.setText("");
+                } else {
+                    txtSnoopy.setText("СНУПІ");
+                    linkActive = true;
+                    txtLink.setText("Відвідайте нашу сторінку у ФБ!");
+                    getTxtLinkDetails.setText("Докладніше >");
+                }
+            }
+        });
+
+        txtLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(linkActive) openBrowser(FB_LINK);
+            }
+        });
+        getTxtLinkDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {if(linkActive) openBrowser(FB_LINK);
+            }
+        });
+
+
+        // User & Events buttons
+        btnUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
+        });
+        btnEvents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, EventsActivity.class));
+            }
+        });
+        // Main Buttons
+        btnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, OrderActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnCalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnTeam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TeamActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnRequisites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ReqActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // Swipe
+        swipeLayout.setSwipeEnabled(false);
         swipeLayout.addSwipeListener(new SwipeLayout.SwipeListener() {
             @Override
             public void onStartOpen(SwipeLayout layout) {
@@ -86,65 +161,50 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        txtSnoopy.setOnClickListener(new View.OnClickListener() {
+
+        //
+
+        btnFB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (txtSnoopy.getText() != "SNOOPY")
-                    txtSnoopy.setText("SNOOPY");
-                else
-                    txtSnoopy.setText("СНУПІ");
+                openBrowser(FB_LINK);
             }
         });
-        btnUser.setOnClickListener(new View.OnClickListener() {
+
+        btnInst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+                openBrowser(INST_LINK);
             }
         });
-        btnEvents.setOnClickListener(new View.OnClickListener() {
+
+        btnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, EventsActivity.class);
-                startActivity(intent);
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:0681990655"));
+                startActivity(callIntent);
             }
         });
-        btnOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, OrderActivity.class);
-                startActivity(intent);
-            }
-        });
-        btnCalendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
-                startActivity(intent);
-            }
-        });
-        btnTeam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TeamActivity.class);
-                startActivity(intent);
-            }
-        });
-        btnRequisites.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ReqActivity.class);
-                startActivity(intent);
-            }
-        });
+
+
     }
 
+
+    void openBrowser(String url) {
+        Uri uri = Uri.parse(url); // missing 'http://' will cause crashed
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
 
     /**
      * Set references to Buttons etc
      */
     private void initializeReferences() {
         txtSnoopy = (TextView) findViewById(R.id.txtSnoopy);
+        txtLink = (TextView) findViewById(R.id.txtLink);
+        getTxtLinkDetails = (TextView) findViewById(R.id.txtLinkDetails);
+
         btnUser = (Button) findViewById(R.id.btnUser);
         btnEvents = (Button) findViewById(R.id.btnEvents);
         btnOrder = (Button) findViewById(R.id.btnOrder);
@@ -152,6 +212,9 @@ public class MainActivity extends AppCompatActivity {
         btnTeam = (Button) findViewById(R.id.btnTeam);
         btnRequisites = (Button) findViewById(R.id.btnRequisites);
         btnSwipe = (Button) findViewById(R.id.btnSwipe);
+        btnInst= (Button) findViewById(R.id.btnInst);
+        btnFB= (Button) findViewById(R.id.btnFb);
+        btnCall= (Button) findViewById(R.id.btnCall);
         swipeLayout = (SwipeLayout) findViewById(R.id.godfather);
 
     }
