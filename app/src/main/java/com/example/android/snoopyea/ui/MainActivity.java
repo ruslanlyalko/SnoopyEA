@@ -164,6 +164,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             android.os.Process.killProcess(pid);
             return;
         }
+        // Swipe down
+        if(swipeOpened)
+        {
+            swipeLayout.close();
+            swipeOpened = false;
+            return;
+        }
 
         // Close app after twice click on Back button
         doubleBackToExitPressedOnce = true;

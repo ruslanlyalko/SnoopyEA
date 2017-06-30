@@ -60,6 +60,8 @@
     <string name="hint_language">Мова</string>
     <string name="hint_double_press">Натисніть ще раз аби вийти з додатку</string>
     <string name="btn_news">Новини</string>
+    <string name="btn_about">Про Компанію</string>
+    <string name="btn_contacts">Контакти</string>
 
 
 </resources>
