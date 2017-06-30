@@ -62,6 +62,10 @@
     <string name="btn_news">Новини</string>
     <string name="btn_about">Про Компанію</string>
     <string name="btn_contacts">Контакти</string>
+    <string name="title_activity_order">Мої замовлення</string>
+    <string name="title_activity_team">Наша команда</string>
+    <string name="title_activity_calendar">Календар подій</string>
+    <string name="title_activity_req">Реквізити</string>
 
 
 </resources>

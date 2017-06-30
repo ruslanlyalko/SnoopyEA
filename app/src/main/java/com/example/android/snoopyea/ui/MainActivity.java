@@ -15,7 +15,7 @@ import com.example.android.snoopyea.utils.SwipeLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final String DEBUG_TAG = "MainActivity.java";
     Button btnUser, btnEvents, btnOrder, btnCalendar, btnTeam, btnRequisites, btnSwipe;
@@ -39,29 +39,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Enable connection without internet
         mDatabase.setPersistenceEnabled(true);
 
-        swipeLayout.setBottomSwipeEnabled(false);
+        /*swipeLayout.setBottomSwipeEnabled(false);
         swipeLayout.setTopSwipeEnabled(false);
+        */
+        swipeLayout.setSwipeEnabled(false);
 
         swipeLayout.addSwipeListener(new SwipeLayout.SwipeListener() {
             @Override
             public void onStartOpen(SwipeLayout layout) {
-                btnSwipe.setText("\\/");
+                btnSwipe.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_down, 0, 0);
             }
 
             @Override
             public void onOpen(SwipeLayout layout) {
-                btnSwipe.setText("\\/");
                 swipeOpened = true;
             }
 
             @Override
             public void onStartClose(SwipeLayout layout) {
-                btnSwipe.setText("/\\");
+                btnSwipe.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_up, 0, 0);
             }
 
             @Override
             public void onClose(SwipeLayout layout) {
-                btnSwipe.setText("/\\");
                 swipeOpened = false;
             }
 
@@ -81,12 +81,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
                 if (swipeOpened)
                     swipeLayout.close();
-                 else
+                else
                     swipeLayout.open();
 
             }
         });
+        txtSnoopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (txtSnoopy.getText() != "SNOOPY")
+                    txtSnoopy.setText("SNOOPY");
+                else
+                    txtSnoopy.setText("СНУПІ");
+            }
+        });
+        btnUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnEvents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, EventsActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, OrderActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnCalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnTeam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TeamActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnRequisites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ReqActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
 
     /**
      * Set references to Buttons etc
@@ -102,59 +154,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSwipe = (Button) findViewById(R.id.btnSwipe);
         swipeLayout = (SwipeLayout) findViewById(R.id.godfather);
 
-
-        txtSnoopy.setOnClickListener(this);
-        btnUser.setOnClickListener(this);
-        btnEvents.setOnClickListener(this);
-        btnOrder.setOnClickListener(this);
-        btnCalendar.setOnClickListener(this);
-        btnTeam.setOnClickListener(this);
-        btnRequisites.setOnClickListener(this);
     }
 
-
-    @Override
-    public void onClick(View v) {
-
-        switch (v.getId()) {
-            case R.id.txtSnoopy: {
-                if (txtSnoopy.getText() != "SNOOPY")
-                    txtSnoopy.setText("SNOOPY");
-                else
-                    txtSnoopy.setText("СНУПІ");
-
-                break;
-            }
-            case R.id.btnUser: {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.btnEvents: {
-                Intent intent = new Intent(this, EventsActivity.class);
-                startActivity(intent);
-                break;
-            }
-
-            case R.id.btnOrder: {
-
-                break;
-            }
-            case R.id.btnCalendar: {
-
-                break;
-            }
-            case R.id.btnTeam: {
-
-                break;
-            }
-            case R.id.btnRequisites: {
-
-                break;
-            }
-        }
-    }
-
+    /**
+     * When user press Back button
+     * close swipe and show message - double click to exit
+     */
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -164,9 +169,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             android.os.Process.killProcess(pid);
             return;
         }
+
         // Swipe down
-        if(swipeOpened)
-        {
+        if (swipeOpened) {
             swipeLayout.close();
             swipeOpened = false;
             return;
@@ -184,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }, 2000);
     }
+
 
 }
 

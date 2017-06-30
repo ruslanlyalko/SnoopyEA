@@ -147,6 +147,7 @@
                 android:layout_weight="5"
                 android:orientation="horizontal">
 
+                <!-- Left Top Button -->
                 <Button
                     android:id="@+id/btnOrder"
                     android:layout_width="match_parent"
@@ -162,6 +163,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/gradient_v"></View>
 
+                <!-- Right Top Button -->
                 <Button
                     android:id="@+id/btnCalendar"
                     android:layout_width="match_parent"
@@ -185,7 +187,7 @@
                 android:layout_weight="5"
                 android:orientation="horizontal">
 
-
+                <!-- Left Bottom Button -->
                 <Button
                     android:id="@+id/btnTeam"
                     android:layout_width="match_parent"
@@ -203,6 +205,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/colorGray"></View>
 
+                <!-- Right Bottom Button -->
                 <Button
                     android:id="@+id/btnRequisites"
                     android:layout_width="match_parent"
@@ -230,9 +233,9 @@
                     android:id="@+id/btnSwipe"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:textColor="@color/colorGray"
-                    android:text="/\\"/>
+                    android:paddingTop="10dp"
+                    android:drawableTop="@drawable/ic_up"
+                    android:background="?android:attr/selectableItemBackground" />
 
             </LinearLayout>
 
